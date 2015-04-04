@@ -66,53 +66,72 @@ use_janrain(auth,filename='private/janrain.key')
 ## Define your tables below (or better in another model file) for example
 ##
 db.define_table('patient',
-    Field('first_name', length=128,requires=IS_NOT_EMPTY()),
- 
-    Field('last_name', length=128, requires=IS_NOT_EMPTY()),
- 
-    Field('dob','date', requires=IS_NOT_EMPTY()),
- 
-    Field('sex', 'string',length=1, requires=[IS_NOT_EMPTY(),IS_IN_SET('F','M')]),
- 
-    Field('email', length=128, unique=True,requires=IS_EMAIL()),
-    
-    Field('phone', 'string',length=10,requires=IS_NOT_EMPTY()),
-    
-    Field('bloodgroup', 'string',length=3,requires=IS_NOT_EMPTY()),
-    
-    Field('allergies', 'text',requires=IS_NOT_EMPTY()),
-    
-    Field('address', length=256, default=''),
- 
-    Field('password', 'password', length=512, readable=False, label='Password'),
- 
-    Field('UPID', length=10, writable=False) ,
-      
-    
-  
-##    format='%(first_name)s %(last_name)s'
-)
+                Field('first_name', length=128,requires=IS_NOT_EMPTY()),
+                Field('last_name', length=128, requires=IS_NOT_EMPTY()),
+                Field('dob','date', requires=IS_NOT_EMPTY()),
+                Field('sex', 'string',length=1, requires=[IS_NOT_EMPTY(),IS_IN_SET('F','M')]),
+                Field('email', length=128, unique=True,requires=IS_EMAIL()),
+                Field('phone', 'string',length=10,requires=IS_NOT_EMPTY()),
+                Field('bloodgroup', 'string',length=3,requires=IS_NOT_EMPTY()),
+                Field('allergies', 'text',requires=IS_NOT_EMPTY()),
+                Field('address', length=256, default=''),
+                Field('password', 'password', length=512, readable=False, label='Password'),
+                Field('UPID', length=10, writable=False, requires=IS_NOT_EMPTY()) ,
+                Field('image','upload')
+                )
+
 db.define_table('doctor',
-    Field('first_name', length=128,requires=IS_NOT_EMPTY()),
- 
-    Field('last_name', length=128, requires=IS_NOT_EMPTY()),
- 
-    Field('dob','date', requires=IS_NOT_EMPTY()),
- 
-    Field('sex', 'string',length=1, requires=[IS_NOT_EMPTY(),IS_IN_SET('F','M')]),
- 
-    Field('email', length=128, unique=True,requires=IS_EMAIL()),
-    
-    Field('phone', 'string',length=10,requires=IS_NOT_EMPTY()),
-    
-    Field('address', length=256, default=''),
- 
-    Field('password', 'password', length=512, readable=False, label='Password'),
- 
-    Field('UPID', length=10, writable=False) ,
-    
-    Field('qualifications', 'text', requires=IS_NOT_EMPTY()),
-    
-    Field('visiting hours', 'string', requires=IS_NOT_EMPTY()),
-    
-    )
+                Field('first_name', length=128,requires=IS_NOT_EMPTY()),
+                Field('last_name', length=128, requires=IS_NOT_EMPTY()),
+                Field('dob','date', requires=IS_NOT_EMPTY()),
+                Field('sex', 'string',length=1, requires=[IS_NOT_EMPTY(),IS_IN_SET('F','M')]),
+                Field('email', length=128, unique=True,requires=IS_EMAIL()),
+                Field('phone', 'string',length=10,requires=IS_NOT_EMPTY()),
+                Field('address', length=256, default=''),
+                Field('password', 'password', length=512, readable=False, label='Password'),
+                Field('UDID', length=10, writable=False, requires=IS_NOT_EMPTY()) ,
+                Field('qualifications', 'text', requires=IS_NOT_EMPTY()),
+                Field('visiting hours', 'string', requires=IS_NOT_EMPTY()),
+                Field('image','upload')
+                )
+
+db.define_table('medicines',
+                Field('Name','string',length=128,requires=IS_NOT_EMPTY()),
+                Field('Dose','string',length=10, requires=IS_NOT_EMPTY()),
+                Field('Salts','string',length=128,requires=IS_NOT_EMPTY()),
+                Field('Usage','text',requires=IS_NOT_EMPTY()),
+                Field('Quantity','integer',requires=IS_NOT_EMPTY()),
+                Field('Expiry Date','date',requires=IS_NOT_EMPTY())
+                )
+db.define_table('EquipmentsChemicals',
+                Field('Name','string',length=128,requires=IS_NOT_EMPTY()),
+                Field('Usage','text',requires=IS_NOT_EMPTY()),
+                Field('Quantity','integer',requires=IS_NOT_EMPTY()),
+                Field('Supplier','string', length=128, requires=IS_NOT_EMPTY())
+               )
+db.define_table('Prescription',
+                Field('Name','string',length=128,requires=IS_NOT_EMPTY()),
+                Field('Dose','string',length=10, requires=IS_NOT_EMPTY()),
+                Field('Duration','string',length=128,requires=IS_NOT_EMPTY()),
+                Field('Other details','text'),
+                format='%(Name)s %(Dose)s %(Duration)s %(Other details)s'
+                )
+db.define_table('FollowUpDetails',
+                Field('Date','date', requires=IS_NOT_EMPTY()),
+                Field('UDID', length=10, writable=False, requires=IS_NOT_EMPTY()) ,
+                format='%(Date)s %(UPID)s'
+                )
+
+db.define_table('MedicalReports',
+                Field('MRID',length=10, requires=IS_NOT_EMPTY()),
+                Field('UPID', length=10, writable=False, requires=IS_NOT_EMPTY()) ,
+                Field('UDID', length=10, writable=False, requires=IS_NOT_EMPTY()) ,
+                Field('Date','date', requires=IS_NOT_EMPTY()),
+                Field('ChiefComplaint','text',requires=IS_NOT_EMPTY()),
+                Field('CaseHistory','text',requires=IS_NOT_EMPTY()),
+                Field('ClinicalFinding','text',requires=IS_NOT_EMPTY()),
+                Field('InvestigationsAdvised','text'),
+                Field('Treatment','text'),
+                Field('Prescription',db.Prescription),
+                Field('Follow-up details',db.FollowUpDetails)
+               )

@@ -99,3 +99,1919 @@ CREATE TABLE doctor(
 );
 success!
 success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2015-04-04T14:50:55.801994
+ALTER TABLE patient ADD image CHAR(512);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2015-04-04T15:34:06.815575
+ALTER TABLE doctor ADD image CHAR(512);
+timestamp: 2015-04-04T15:34:06.949798
+ALTER TABLE doctor ADD udid CHAR(10);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2015-04-04T15:47:47.159198
+CREATE TABLE medicines(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Dose CHAR(10),
+    Salts CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Expiry Date DATE
+);
+success!
+timestamp: 2015-04-04T15:47:47.295574
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:49:31.689168
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:49:47.716418
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:50:05.887498
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:50:40.567003
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:51:40.422523
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:53:08.589558
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:54:52.860309
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:55:52.847476
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:56:52.844698
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:57:52.835687
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:58:52.850106
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T15:59:52.843430
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:00:52.763011
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:01:52.774844
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:05:36.196239
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:06:36.190793
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:07:29.866707
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:13:36.085826
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:13:45.907598
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:14:45.646316
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:15:46.209046
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:16:46.267237
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:17:46.268311
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:18:46.209874
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:19:46.210333
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:20:46.209586
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:21:46.293624
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:22:46.299860
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:23:46.234749
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:24:46.217947
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:25:47.220774
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:26:47.214992
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:27:47.222615
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:28:47.218009
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:29:47.222572
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:30:47.214973
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:31:47.216993
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:32:47.211789
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:33:47.224168
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:34:47.217350
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:35:47.220311
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:36:47.207979
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:37:47.212136
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:38:47.206084
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:39:47.212199
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:40:47.208932
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:41:47.213950
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:42:47.212888
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:43:47.211823
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:44:47.216147
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:45:47.218580
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:46:47.229774
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:47:47.218588
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:48:47.210755
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:49:47.213497
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:50:47.215421
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:51:00.134568
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:52:00.212885
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:53:00.216624
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:54:00.222250
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:55:00.210218
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:56:00.214750
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:57:00.215204
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:58:00.209675
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T16:59:00.220299
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:00:00.214068
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:01:00.210136
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:02:00.221621
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:03:00.221238
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:04:00.239140
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:05:00.214916
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:06:00.212236
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:07:00.214179
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:08:00.222245
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:09:00.213400
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:10:00.212092
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:11:00.217315
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:12:00.210744
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:13:00.207124
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:14:00.205406
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:15:00.231743
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:38:38.438773
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:39:38.420127
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:40:38.422869
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:41:38.421824
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:42:38.406164
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:43:38.424248
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:44:38.435621
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:45:38.406058
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:46:38.410336
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:47:38.420180
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:48:38.432460
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:49:38.425790
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:50:38.416533
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:51:38.441973
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:52:38.434559
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:53:38.412743
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:54:12.414346
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:54:42.842276
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:55:05.555260
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:55:30.386398
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:56:13.002519
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:57:35.408577
+CREATE TABLE equipments/chemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+timestamp: 2015-04-04T17:57:54.948667
+CREATE TABLE EquipmentsChemicals(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Usage TEXT,
+    Quantity INTEGER,
+    Supplier CHAR(128)
+);
+success!
+success!
+success!
+success!
+success!
+timestamp: 2015-04-04T17:59:19.059205
+CREATE TABLE Prescription(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(128),
+    Dose CHAR(10),
+    Duration CHAR(128),
+    Other details TEXT
+);
+success!
+timestamp: 2015-04-04T17:59:19.195581
+CREATE TABLE FollowUpDetails(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Date DATE,
+    UDID CHAR(10)
+);
+success!
+timestamp: 2015-04-04T17:59:19.340473
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:01:01.318009
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:02:01.194536
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:03:01.429345
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:04:01.419844
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:05:01.411862
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:06:01.432811
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:06:05.020082
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:08:25.449738
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+success!
+success!
+timestamp: 2015-04-04T18:12:05.020792
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:14:11.915938
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:15:00.911160
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:15:41.915421
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:15:49.754261
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:16:00.655204
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:16:49.607403
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:16:53.692468
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:16:56.805178
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:17:00.554583
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2015-04-04T18:19:27.046471
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:19:48.887166
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:20:00.635544
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE,
+    Follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2015-04-04T18:22:24.802736
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT,
+    Prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE
+);
+success!
+success!
+timestamp: 2015-04-04T18:22:40.103636
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT
+);
+success!
+success!
+timestamp: 2015-04-04T18:22:49.413497
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT
+);
+success!
+success!
+timestamp: 2015-04-04T18:23:00.565396
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT
+);
+success!
+success!
+timestamp: 2015-04-04T18:23:18.236869
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT
+);
+success!
+success!
+timestamp: 2015-04-04T18:23:49.426946
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT
+);
+success!
+success!
+timestamp: 2015-04-04T18:24:00.667895
+CREATE TABLE medical reports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    Case history TEXT,
+    Clinical Finding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT
+);
+success!
+success!
+timestamp: 2015-04-04T18:24:39.051126
+CREATE TABLE MedicalReports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    CaseHistory TEXT,
+    ClinicalFinding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT
+);
+success!
+success!
+timestamp: 2015-04-04T18:24:49.504159
+CREATE TABLE MedicalReports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    CaseHistory TEXT,
+    ClinicalFinding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT
+);
+success!
+success!
+timestamp: 2015-04-04T18:24:57.330861
+CREATE TABLE MedicalReports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    CaseHistory TEXT,
+    ClinicalFinding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT
+);
+success!
+success!
+timestamp: 2015-04-04T18:25:00.567584
+CREATE TABLE MedicalReports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    CaseHistory TEXT,
+    ClinicalFinding TEXT,
+    Investigations advised(if any) TEXT,
+    Treatment TEXT
+);
+success!
+success!
+timestamp: 2015-04-04T18:25:37.898502
+CREATE TABLE MedicalReports(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    MRID CHAR(10),
+    UPID CHAR(10),
+    UDID CHAR(10),
+    Date DATE,
+    Chief Complaint TEXT,
+    CaseHistory TEXT,
+    ClinicalFinding TEXT,
+    Investigations advised TEXT,
+    Treatment TEXT
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2015-04-04T18:26:21.114927
+ALTER TABLE MedicalReports ADD prescription INTEGER REFERENCES Prescription (id) ON DELETE CASCADE;
+timestamp: 2015-04-04T18:26:21.267719
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:26:49.409805
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:27:00.578425
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:27:14.134167
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:27:28.969036
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:27:49.976856
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:28:00.578977
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:28:04.172186
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:28:28.837542
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:29:00.570975
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:29:04.179487
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:29:28.846256
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+timestamp: 2015-04-04T18:30:00.575505
+ALTER TABLE MedicalReports ADD case history TEXT;
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2015-04-04T18:32:39.688239
+ALTER TABLE MedicalReports ADD chiefcomplaint TEXT;
+timestamp: 2015-04-04T18:32:39.856344
+ALTER TABLE MedicalReports ADD investigationsadvised TEXT;
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2015-04-04T18:33:14.545296
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2015-04-04T18:35:00.561286
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:35:29.402789
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:36:00.545279
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:36:30.414767
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:36:31.910412
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:37:00.542376
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:37:30.399328
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:38:00.534319
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:38:30.399514
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:39:00.537877
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:39:30.418487
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;

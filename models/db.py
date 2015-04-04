@@ -132,6 +132,6 @@ db.define_table('MedicalReports',
                 Field('ClinicalFinding','text',requires=IS_NOT_EMPTY()),
                 Field('InvestigationsAdvised','text'),
                 Field('Treatment','text'),
-                Field('Prescription',db.Prescription),
-                Field('Follow-up details',db.FollowUpDetails)
+                #Field('Prescription',db.Prescription),
+                #Field('Follow-up details',db.FollowUpDetails)
                )

@@ -2031,3 +2031,51 @@ success!
 success!
 timestamp: 2015-04-04T18:41:30.392473
 ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:42:00.539358
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:42:30.411298
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:43:00.545299
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:43:30.408573
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:44:00.543577
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:44:30.397788
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:45:00.615300
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:45:02.139389
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+timestamp: 2015-04-04T18:45:06.765708
+ALTER TABLE MedicalReports ADD follow-up details INTEGER REFERENCES FollowUpDetails (id) ON DELETE CASCADE;
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!

@@ -1,0 +1,1463 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body bgcolor="#ffffff">
+
+<title>SPIN VERIFICATION EXAMPLES AND EXERCISES</title>
+<h2><tt>SPIN VERIFICATION EXAMPLES AND EXERCISES</tt></h2>
+Included in this memo are some verification exercises
+that can help new users to get acquainted
+with <i>Spin</i>.  A few example models for standard
+verification problems are included at the end.
+All examples are also available as <i>Promela</i> files in
+the Examples directory of the <i>Spin</i> distribution.
+
+<h2><tt>1. Evaluating Search Complexity</tt></h2>
+
+This first exercise is meant to give an indication of
+the nature of the state space explosion phenomenon,
+and how <i>Spin</i> deals with it.
+It consists of eight small problems that are solved using <i>Spin</i>.
+The problems are numbered <b>[1.a]</b> through <b>[1.h]</b>.
+At each step, it is best to first try to predict what
+should happen, write down these predictions, then
+perform the experiment, and explain the result.
+<p>
+<b>[1.a]</b> How many reachable states do you predict will the
+following naive <i>Promela</i> model generate?
+</p><pre>	init {	/* file: ex.1a */
+		byte i = 0;
+		do
+		:: i = i+1
+		od
+	}
+</pre>
+Try a simulation run:
+<pre>	$ spin -p -l ex.1a	# print out local vars at every step
+	...
+</pre>
+Will the simulation terminate? []
+<p>
+<b>[1.b]</b> Estimate the total number of reachable states
+that should be inspected in an exhaustive verification.
+Is it a finite number?
+Will a verification run terminate?
+Try it as follows.
+</p><pre>	$ spin -a ex.1a
+	$ gcc -o pan pan.c
+	$ ./pan
+	...
+</pre>
+Explain the output. []
+<p>
+<b>[1.c]</b> What would happen if you had declared the variable to be a
+<tt>short </tt>
+instead of a
+<tt>byte ? </tt>
+What if you use an
+<tt>int ? </tt>
+[Hint: see the definition of typical data ranges in
+the manual page for Promela <a href="http://spinroot.com/spin/Man/datatypes.html">datatypes</a>]
+</p><p>
+Try either of them with a verification run.
+How do you explain the result?
+[Hint: check the analyzer's defaults by typing
+<tt>"pan --" ] </tt>
+[]
+</p><p>
+<b>[1.d]</b> Next, predict how many reachable states there
+are for the following system.
+Write them down as a complete reachability tree.
+</p><pre>	#define N	2
+	init {	/* file: ex.1b */
+		chan dummy = [N] of { byte };
+		do
+		:: dummy!85
+		:: dummy!170
+		od
+	}
+</pre>
+Check your prediction as follows.
+We're only interested in the size of the state space,
+not in the obvious problems caused by buffer overflow,
+so we use the 
+<tt>-m </tt>
+option from <i>Spin</i> to define that buffer overflow is to be ignored.
+(Messages appended to a full buffer are then lost.)
+<pre>	$ spin -m -a ex.1b	# use -m to ignore buffer overflow
+	$ gcc -o pan pan.c
+	$ ./pan
+	...
+</pre>
+Explain the result. []
+<p>
+<b>[1.e]</b> What happens if you set N to 3 ?
+Express the number of states as a function of N.
+Use the formula to calculate how many states there
+will be if you set N to 14 ?
+Check your prediction as follows.
+</p><pre>	$ spin -m -a ex.1b	# use -m to ignore buffer overflow
+	$ gcc -o pan pan.c	# optional: use the optimizer -O
+	$ time ./pan
+	...
+</pre>
+<pre>Write down:
+	T: the <i>sum</i> of user time plus system time for the run
+	S: the number of states <i>stored</i>
+	G: the number of <i>total</i> number of states generated and analyzed
+	V: the vector-size (the amount of memory needed to store one state)
+
+G/T gives you a measure for the efficiency of the run, and
+S*V gives you the amount of memory that is needed to store
+the state space without compression.
+</pre>
+This is not the only place where memory that is used during the
+search (the stack also consumes memory) but it is typically the
+largest memory requirement. []
+<p>
+<b>[1.f]</b> The efficiency of the conventional reachability analysis is
+determined by the state space storage functions.
+To study this, repeat the last verification run with a smaller and
+a bigger hash table for storing reachable states:
+</p><pre>	$ time pan -w10		# hash table with 2<sup>10</sup> slots
+	...
+	$ time pan -w20		# hash table with 2<sup>20</sup> slots
+	...
+</pre>
+Explain the results.
+[Hint: compare the number of hash conflicts.] []
+<p>
+<b>[1.g]</b> How much memory would you need to do a run with N=20 ?
+(Warning: both the number of reachable states and
+the number of bytes per state goes up with N.
+Estimate about 30 bytes per state for N=20.)
+Assuming that you have about 8 Megabyte on your system, what maximal fraction
+of the state-space would you expect to be able to analyze ?
+</p><p>
+Now set N to 20 and use the bitstate storage option, as follows.
+</p><pre>	$ spin -m -a ex.1b		# as before
+	$ gcc -DBITSTATE -o pan pan.c	# different
+	$ time ./pan
+	...
+</pre>
+
+If you did the calculation, you probably estimated
+that there should be 2,097,151 reachable system states for N=20.
+What percentage of these states was reached in the new run?
+How much memory was used [Hint: cf. <b>[1.h]</b> below] ?
+(Compare to the earlier estimated maximal coverage for a
+conventional verification and explain the difference.) []
+<p>
+<b>[1.h]</b> The default bitstate space, used above,
+has 2<sup>21</sup> bits (i.e., 2<sup>18</sup> bytes, or about one quarter Megabyte)
+repeat the run with different amount of memory to get
+different coverage.
+Check what percentage of the number of states is reached when you
+use the 8 Megabyte state space on which your first estimate for
+maximal coverage in a full state space search was based (2<sup>23</sup> bytes
+is 2<sup>26</sup> bits, which means a runtime flag
+<tt>-w26 ) </tt>
+</p><p>
+You should be able to get close to 99% coverage and between 4,000 and 40,000
+states <i>analyzed</i> per second.
+For comparison, the speed on a DEC/VAX-8550 is roughly 16,000 s/s.;
+on a 30 MIPS Silicon Graphics machine 40,000 s/s; on a Sun 3/60 4,500 s/s. []
+
+</p><h2><tt>2. Verification of a Protocol</tt></h2>
+<p>
+Figure 2 shows a protocol specification given
+by <a href="#R2">Bartlett et al.</a> as Figure 3c
+in their paper introducing the alternating-bit protocol. []
+</p><p>
+</p><center>
+<img src="SPIN%20VERIFICATION%20EXAMPLES%20AND%20EXERCISES_files/fig1.gif">
+</center>
+<p>
+
+The <i>Promela</i> version of this protocol is shown below.
+Use <i>Spin</i> to check if it has the property that
+</p><ul>
+``<i>Every message fetched by A is received error-free
+at least once and accepted at most once by B</i>.''
+</ul>
+<p>
+</p><pre>  1 #define MAX 4                /* file ex.2 */
+  2 proctype A(chan in, out)
+  3 {	byte mt; /* message data */
+  4 	bit  vr;
+  5 S1:	mt = (mt+1)%MAX;
+  6 	out!mt,1;
+  7 	goto S2;
+  8 S2:	in?vr;
+  9 	if
+ 10 	:: (vr == 1) -&gt; goto S1
+ 11 	:: (vr == 0) -&gt; goto S3
+ 12 	:: printf("MSC: AERROR1\n") -&gt; goto S5
+ 13 	fi;
+ 14 S3:	out!mt,1;
+ 15 	goto S2;
+ 16 S4:	in?vr;
+ 17 	if
+ 18 	:: goto S1
+ 19 	:: printf("MSC: AERROR2\n"); goto S5
+ 20 	fi;
+ 21 S5:	out!mt,0;
+ 22 	goto S4
+ 23 }
+ 24 proctype B(chan in, out)
+ 25 {	byte mr, lmr;
+ 26 	bit ar;
+ 27 	goto S2; /* initial state */
+ 28 S1:	assert(mr == (lmr+1)%MAX);
+ 29 	lmr = mr;
+ 30 	out!1;
+ 31 	goto S2;
+ 32 S2:	in?mr,ar;
+ 33 	if
+ 34 	:: (ar == 1) -&gt; goto S1
+ 35 	:: (ar == 0) -&gt; goto S3
+ 36 	:: printf("MSC: ERROR1\n"); goto S5
+ 37 	fi;
+ 38 S3:	out!1;
+ 39 	goto S2;
+ 40 S4:	in?mr,ar;
+ 41 	if
+ 42 	:: goto S1
+ 43 	:: printf("MSC: ERROR2\n"); goto S5
+ 44 	fi;
+ 45 S5:	out!0;
+ 46 	goto S4
+ 47 }
+ 48 init {
+ 49 	chan a2b = [2] of { bit };
+ 50 	chan b2a = [2] of { byte, bit };
+ 51 	atomic {
+ 52 		run A(a2b, b2a);
+ 53 		run B(b2a, a2b)
+ 54 	}
+ 55 }
+</pre>
+<h2><tt>3. Verification of an Interface Standard</tt></h2>
+<p>
+CCITT Recommendation X.21 was one of the first protocols
+shown to be incompletely specified with an automated analysis.
+The verification was performed in 1977 by <a href="#R3">Colin West</a>.
+
+</p><p>
+</p><center>
+<img src="SPIN%20VERIFICATION%20EXAMPLES%20AND%20EXERCISES_files/fig2.gif">
+</center>
+<p>
+
+What in 1977 was described as a ``reasonably complex protocol''
+is today a rather simple litmus test for automated protocol
+verifiers, that shouldn't take more than a few milli-seconds of CPU time.
+The <i>Promela</i> model below is derived from Figure 3, which is
+based on the specification used by West.
+(<i>``all''</i> in Figure 3 means ``all other states.'')
+</p><pre>  1 mtype = { a, b, c, d, e, i, l, m, n, q, r, u, v };
+  2                                   /* file ex.3 */
+  3 chan dce = [0] of { mtype };
+  4 chan dte = [0] of { mtype };
+  5 
+  6 active proctype dte_proc()
+  7 {
+  8 state01:
+  9 	do
+ 10 	:: dce!b -&gt; /* state21 */ dce!a
+ 11 	:: dce!i -&gt; /* state14 */
+ 12 			if
+ 13 			:: dte?m -&gt; goto state19
+ 14 			:: dce!a
+ 15 			fi
+ 16 	:: dte?m -&gt; goto state18
+ 17 	:: dte?u -&gt; goto state08
+ 18 	:: dce!d -&gt; break
+ 19 	od;
+ 20 
+ 21 	/* state02: */
+ 22 	if
+ 23 	:: dte?v
+ 24 	:: dte?u -&gt; goto state15
+ 25 	:: dte?m -&gt; goto state19
+ 26 	fi;
+ 27 state03:
+ 28 	dce!e;
+ 29 	/* state04: */
+ 30 	if
+ 31 	:: dte?m -&gt; goto state19
+ 32 	:: dce!c
+ 33 	fi;
+ 34 	/* state05: */
+ 35 	if
+ 36 	:: dte?m -&gt; goto state19
+ 37 	:: dte?r
+ 38 	fi;
+ 39 	/* state6A: */
+ 40 	if
+ 41 	:: dte?m -&gt; goto state19
+ 42 	:: dte?q
+ 43 	fi;
+ 44 state07:
+ 45 	if
+ 46 	:: dte?m -&gt; goto state19
+ 47 	:: dte?r
+ 48 	fi;
+ 49 	/* state6B: */
+ 50 	if		/* non-deterministic select */
+ 51 	:: dte?q -&gt; goto state07
+ 52 	:: dte?q
+ 53 	:: dte?m -&gt; goto state19
+ 54 	fi;
+ 55 	/* state10: */
+ 56 	if
+ 57 	:: dte?m -&gt; goto state19
+ 58 	:: dte?r
+ 59 	fi;
+ 60 state6C:
+ 61 	if
+ 62 	:: dte?m -&gt; goto state19
+ 63 	:: dte?l
+ 64 	fi;
+ 65 	/* state11: */
+ 66 	if
+ 67 	:: dte?m -&gt; goto state19
+ 68 	:: dte?n
+ 69 	fi;
+ 70 	/* state12: */
+ 71 	if
+ 72 	:: dte?m -&gt; goto state19
+ 73 	:: dce!b -&gt; goto state16
+ 74 	fi;
+ 75 state15:
+ 76 	if
+ 77 	:: dte?v -&gt; goto state03
+ 78 	:: dte?m -&gt; goto state19
+ 79 	fi;
+ 80 state08:
+ 81 	if
+ 82 	:: dce!c
+ 83 	:: dce!d -&gt; goto state15
+ 84 	:: dte?m -&gt; goto state19
+ 85 	fi;
+ 86 	/* state09: */
+ 87 	if
+ 88 	:: dte?m -&gt; goto state19
+ 89 	:: dte?q
+ 90 	fi;
+ 91 	/* state10B: */
+ 92 	if
+ 93 	:: dte?r -&gt; goto state6C
+ 94 	:: dte?m -&gt; goto state19
+ 95 	fi;
+ 96 state18:
+ 97 	if
+ 98 	:: dte?l -&gt; goto state01
+ 99 	:: dte?m -&gt; goto state19
+100 	fi;
+101 state16:
+102 	dte?m;
+103 	/* state17: */
+104 	dte?l;
+105 	/* state21: */
+106 	dce!a; goto state01;
+107 state19:
+108 	dce!b;
+109 	/* state20: */
+110 	dte?l;
+111 	/* state21: */
+112 	dce!a; goto state01
+113 }
+114 active proctype dce_proc()
+115 {
+116 state01:
+117 	do
+118 	:: dce?b -&gt; /* state21 */ dce?a
+119 	:: dce?i -&gt; /* state14 */
+120 			if
+121 			:: dce?b -&gt; goto state16
+122 			:: dce?a
+123 			fi
+124 	:: dte!m -&gt; goto state18
+125 	:: dte!u -&gt; goto state08
+126 	:: dce?d -&gt; break
+127 	od;
+128 
+129 	/* state02: */
+130 	if
+131 	:: dte!v
+132 	:: dte!u -&gt; goto state15
+133 	:: dce?b -&gt; goto state16
+134 	fi;
+135 state03:
+136 	dce?e;
+137 	/* state04: */
+138 	if
+139 	:: dce?b -&gt; goto state16
+140 	:: dce?c
+141 	fi;
+142 	/* state05: */
+143 	if
+144 	:: dce?b -&gt; goto state16
+145 	:: dte!r
+146 	fi;
+147 	/* state6A: */
+148 	if
+149 	:: dce?b -&gt; goto state16
+150 	:: dte!q
+151 	fi;
+152 state07:
+153 	if
+154 	:: dce?b -&gt; goto state16
+155 	:: dte!r
+156 	fi;
+157 	/* state6B: */
+158 	if		/* non-deterministic select */
+159 	:: dte!q -&gt; goto state07
+160 	:: dte!q
+161 	:: dce?b -&gt; goto state16
+162 	fi;
+163 	/* state10: */
+164 	if
+165 	:: dce?b -&gt; goto state16
+166 	:: dte!r
+167 	fi;
+168 state6C:
+169 	if
+170 	:: dce?b -&gt; goto state16
+171 	:: dte!l
+172 	fi;
+173 	/* state11: */
+174 	if
+175 	:: dce?b -&gt; goto state16
+176 	:: dte!n
+177 	fi;
+178 	/* state12: */
+179 	if
+180 	:: dce?b -&gt; goto state16
+181 	:: dte!m -&gt; goto state19
+182 	fi;
+183 state15:
+184 	if
+185 	:: dte!v -&gt; goto state03
+186 	:: dce?b -&gt; goto state16
+187 	fi;
+188 state08:
+189 	if
+190 	:: dce?c
+191 	:: dce?d -&gt; goto state15
+192 	:: dce?b -&gt; goto state16
+193 	fi;
+194 	/* state09: */
+195 	if
+196 	:: dce?b -&gt; goto state16
+197 	:: dte!q
+198 	fi;
+199 	/* state10B: */
+200 	if
+201 	:: dte!r -&gt; goto state6C
+202 	:: dce?b -&gt; goto state16
+203 	fi;
+204 state18:
+205 	if
+206 	:: dte!l -&gt; goto state01
+207 	:: dce?b -&gt; goto state16
+208 	fi;
+209 state16:
+210 	dte!m;
+211 	/* state17: */
+212 	dte!l;
+213 	/* state21: */
+214 	dce?a; goto state01;
+215 state19:
+216 	dce?b;
+217 	/* state20: */
+218 	dte!l;
+219 	/* state21: */
+220 	dce?a; goto state01
+221 }
+</pre>
+
+Verify the X.21 protocol using <i>Spin</i>. []
+<h2><tt>4. Verification of Mutual Exclusion Algorithms</tt></h2>
+<p>
+If two or more concurrent processes execute the
+same code and access the same data, there is
+a potential problem that they may overwrite
+each others results and corrupt the data.
+The mutual exclusion problem is the problem of
+restricting access to a critical section in the
+code to a single process at a time, assuming <i>only</i>
+the indivisibility of read and write instructions.
+(The problem disappears if one can assume an
+indivisible test-and-set instruction.)
+The problem and a first solution were first published
+by <a href="#R4">Dijkstra</a>.
+
+</p><p>
+<b>[4.a]</b> The following `improved' solution appeared one year later in the
+same journal (<i>Comm. of the ACM</i>, Vol. 9, No. 1, p. 45) by
+another author.
+It is reproduced here as it was published (in pseudo Algol).
+</p><pre>  1 Boolean array b(0;1) integer k, i, j,
+  2 comment process i, with i either 0 or 1 and j = 1-i;
+  3 C0:	b(i) := false;
+  4 C1:	if k != i then begin
+  5 C2:	if not (b(j) then go to C2;
+  6 	else k := i; go to C1 end;
+  7 	else critical section;
+  8 	b(i) := true;
+  9 	remainder of program;
+ 10 	go to C0;
+ 11 	end
+</pre>
+Model the solution in <i>Promela</i>, and proof or disproof the
+correctness of the algorithm. []
+<p>
+<b>[4.b]</b> The problem continues to be popular.
+For an overview solution attempts up to
+roughly 1984, see <a href="#R5">Raynal</a> or <a href="#R6">Lamport</a>.
+For two processes, for instance, a particularly elegant
+solution was published by <a href="#R7">Peterson</a>.
+In <i>Promela</i> the solution can be modeled as follows.
+The predefined variable \(CW_pid contains the id of
+the running process:  in this case either 0 or 1.
+
+</p><pre>  1 #define true	1                      /* file ex.4b */
+  2 #define false	0
+  3 bool flag[2];
+  4 bool turn;
+  5 active [2] proctype user()
+  6 {	flag[_pid] = true;
+  7 	turn = _pid;
+  8 	(flag[1-_pid] == false || turn == 1-_pid);
+  9 crit:	skip;	/* critical section */
+ 10 	flag[_pid] = false
+ 11 }
+</pre>
+Prove Peterson's algorithm correct with <i>Spin</i>. []
+<p>
+<b>[4.c]</b> Despite all the publications,
+there is no shortage of faulty solutions to the
+mutual exclusion problem.
+The next version was recommended
+by a computer manufacturer to a customer.
+</p><pre>  1 byte in;                                    /* file ex.4c */
+  2 byte x, y, z;
+  3 active [2] proctype user()
+  4 {	byte me = _pid+1;			/* me is 1 or 2 */
+  5 L1:	x = me;
+  6 L2:	if
+  7 	:: (y != 0 &amp;&amp; y != me) -&gt; goto L1	/* try again */
+  8 	:: (y == 0 || y == me)
+  9 	fi;
+ 10 L3:	z = me;
+ 11 L4:	if
+ 12 	:: (x != me)  -&gt; goto L1		/* try again */
+ 13 	:: (x == me)
+ 14 	fi;
+ 15 L5:	y = me;
+ 16 L6:	if
+ 17 	:: (z != me) -&gt; goto L1			/* try again */
+ 18 	:: (z == me)
+ 19 	fi;
+ 20 L7:						/* success */
+ 21 	in = in+1;
+ 22 	assert(in == 1);
+ 23 	in = in - 1;
+ 24 	goto L1
+ 25 }
+</pre>
+First try to find a scenario that leads to the assertion
+violation by studying the algorithm.
+Next generate the counter-example with <i>Spin</i>. []
+
+<h2><tt>5. Verification of Petri Nets</tt></h2>
+<p>
+It is often easier to build an little verification
+model and mechanically verify it than it is to write
+or to check a manual proof of correctness.
+</p><p>
+</p><center>
+<img src="SPIN%20VERIFICATION%20EXAMPLES%20AND%20EXERCISES_files/fig3.gif">
+</center>
+<p>
+
+Petri Nets are relatively easy to model as <i>Promela</i> verification models.
+A <i>Promela</i> model for the net in Figure 4, for instance, is shown below.
+</p><pre>  1 #define Place	byte    /* assume &lt; 256 tokens per place */
+  2                             /* file ex.5a */
+  3 Place p1, p2, p3;
+  4 Place p4, p5, p6;
+  5 #define inp1(x)		(x&gt;0) -&gt; x=x-1
+  6 #define inp2(x,y)	(x&gt;0&amp;&amp;y&gt;0) -&gt; x = x-1; y=y-1
+  7 #define out1(x)		x=x+1
+  8 #define out2(x,y)	x=x+1; y=y+1
+  9 init
+ 10 {	p1 = 1; p4 = 1;	/* initial marking */
+ 11 	do
+ 12 /*t1*/	:: atomic { inp1(p1)	-&gt; out1(p2) }
+ 13 /*t2*/	:: atomic { inp2(p2,p4)	-&gt; out1(p3) }
+ 14 /*t3*/	:: atomic { inp1(p3)	-&gt; out2(p1,p4) }
+ 15 /*t4*/	:: atomic { inp1(p4)	-&gt; out1(p5) }
+ 16 /*t5*/	:: atomic { inp2(p1,p5) -&gt; out1(p6) }
+ 17 /*t6*/	:: atomic { inp1(p6)	-&gt; out2(p4,p1) }
+ 18 	od
+ 19 }
+</pre>
+<p>
+For this exercise, consider the Petri Net model below, which
+first appeared as Figure 1 in <a href="#R8">Berthelot et al.</a>.
+The net was proven to be deadlock free with a manual reduction
+and proof technique.
+Verify the result with <i>Spin</i>. []
+
+</p><pre>  1 #define Place	byte	/* assume &lt; 256 tokens per place */
+  2                             /* file ex.5b */
+  3 Place P1, P2, P4, P5, RC, CC, RD, CD;
+  4 Place p1, p2, p4, p5, rc, cc, rd, cd;
+  5 
+  6 #define inp1(x)		(x&gt;0) -&gt; x=x-1
+  7 #define inp2(x,y)	(x&gt;0&amp;&amp;y&gt;0) -&gt; x = x-1; y=y-1
+  8 #define out1(x)		x=x+1
+  9 #define out2(x,y)	x=x+1; y=y+1
+ 10 
+ 11 init
+ 12 {	P1 = 1; p1 = 1;	/* initial marking */
+ 13 	do
+ 14 	:: atomic { inp1(P1)	-&gt; out2(rc,P2)	}	/* DC */
+ 15 	:: atomic { inp2(P2,CC)	-&gt; out1(P4)	}	/* CA */
+ 16 	:: atomic { inp1(P4)	-&gt; out2(P5,rd)	}	/* DD */
+ 17 	:: atomic { inp2(P5,CD)	-&gt; out1(P1)	}	/* FD */
+ 18 	:: atomic { inp2(P1,RC)	-&gt; out2(P4,cc)	}	/* AC */
+ 19 	:: atomic { inp2(P4,RD) -&gt; out2(P1,cd)	}	/* AD */
+ 20 	:: atomic { inp2(P5,RD)	-&gt; out1(P1)	}	/* DA */
+ 21 
+ 22 	:: atomic { inp1(p1)	-&gt; out2(RC,p2)	}	/* dc */
+ 23 	:: atomic { inp2(p2,cc)	-&gt; out1(p4)	}	/* ca */
+ 24 	:: atomic { inp1(p4)	-&gt; out2(p5,RD)	}	/* dd */
+ 25 	:: atomic { inp2(p5,cd)	-&gt; out1(p1)	}	/* fd */
+ 26 	:: atomic { inp2(p1,rc)	-&gt; out2(p4,CC)	}	/* ac */
+ 27 	:: atomic { inp2(p4,rd) -&gt; out2(p1,CD)	}	/* ad */
+ 28 	:: atomic { inp2(p5,rd)	-&gt; out1(p1)	}	/* da */
+ 29 	od
+ 30 }
+</pre>
+<h2><tt>6. The Cambridge Ring Protocol</tt></h2>
+<p>
+The model below is based on the description in <a href="#R9">Needham and Herbert's book</a>.
+
+</p><pre>  1 #define LOSS	0	/* enable or disable message loss */
+  2                             /* file ex.6 */
+  3 #define QSZ	5               /* length of message queues */
+  4 
+  5 mtype =	{ RDY, NOTRDY, DATA, NODATA, RESET };
+  6 
+  7 chan sender	= [QSZ] of { mtype, byte };
+  8 chan recv	= [QSZ] of { mtype, byte };
+  9 
+ 10 active proctype Sender()
+ 11 {	short n = -1; byte t,m;
+ 12 
+ 13 	xr sender;
+ 14 	xs recv;
+ 15 
+ 16 I:		/* Idle State */
+ 17 		do
+ 18 #if LOSS==1
+ 19 		:: sender?_,_ -&gt; progress2: skip
+ 20 #endif
+ 21 		:: sender?RESET,0 -&gt;
+ 22 ackreset:		recv!RESET,0;	/* stay in idle */
+ 23 			n = -1;
+ 24 			goto I
+ 25 
+ 26 		/* E-rep: protocol error */
+ 27 
+ 28 		:: sender?RDY,m -&gt;		/* E-exp */
+ 29 			assert(m == (n+1)%4);
+ 30 advance:		n = (n+1)%4;
+ 31 			if
+ 32 /* buffer */		:: atomic {
+ 33 				printf("MSC: NEW\n");
+ 34 				recv!DATA,n;
+ 35 				goto E
+ 36 			   }
+ 37 /* no buffer */		:: recv!NODATA,n;
+ 38 				goto N
+ 39 			fi
+ 40 
+ 41 		:: sender?NOTRDY,m -&gt;	/* N-exp */
+ 42 expected:		assert(m == (n+1)%4);
+ 43 			goto I
+ 44 
+ 45 		/* Timeout */
+ 46 		/* ignored (p.154, in [Needham'82]) */
+ 47 
+ 48 		:: goto reset	/* spontaneous reset */
+ 49 		od;
+ 50 E:		/* Essential element sent, ack expected */
+ 51 		do
+ 52 #if LOSS==1
+ 53 		:: sender?_,_ -&gt; progress0: skip
+ 54 #endif
+ 55 		:: sender?RESET,0 -&gt;
+ 56 			goto ackreset
+ 57 
+ 58 		:: sender?RDY,m -&gt;
+ 59 			if
+ 60 			:: (m == n) -&gt;		/* E-rep */
+ 61 				goto retrans
+ 62 			:: (m == (n+1)%4) -&gt;	/* E-exp */
+ 63 				goto advance
+ 64 			fi
+ 65 
+ 66 		:: sender?NOTRDY,m -&gt;	/* N-exp */
+ 67 			goto expected
+ 68 
+ 69 		/* Timeout */
+ 70 		/* a proper behaved timeout leaves part of the
+ 71 		   protocol specification unreachable;  to check
+ 72 		   less well-behaved timeout behavior, replace
+ 73 		   the timeout keyword below with "empty(sender)"
+ 74 		   to allow the retransmission at any time when the
+ 75 		   sender queue is empty.  even more mis-behaved
+ 76 		   timeouts can be checked by replacing timeout with
+ 77 		   "skip"  (i.e., unconditionally executable)
+ 78 		*/
+ 79 		:: timeout -&gt;
+ 80 			printf("MSC: STO\n");
+ 81 retrans:		recv!DATA,n	/* retransmit */
+ 82 
+ 83 		:: goto reset
+ 84 		od;
+ 85 N:		/* Non-essential element sent */
+ 86 		do
+ 87 #if LOSS==1
+ 88 		:: sender?_,_ -&gt; progress1: skip
+ 89 #endif
+ 90 		:: sender?RESET,0 -&gt;
+ 91 			goto ackreset
+ 92 
+ 93 		:: sender?RDY,m -&gt;		/* E-rep */
+ 94 			assert(m == n)		/* E-exp: protocol error */
+ 95 			-&gt; recv!NODATA,n	/* retransmit and stay in N */
+ 96 
+ 97 		:: recv!DATA,n;		/* buffer ready event */
+ 98 			goto E
+ 99 
+100 		:: goto reset
+101 
+102 		/* Timeout */
+103 		/* ignored (p.154, in [Needham'82]) */
+104 		od;
+105 
+106 reset:		recv!RESET,0;
+107 		do
+108 #if LOSS==1
+109 		:: sender?_,_ -&gt; progress3: skip
+110 #endif
+111 		:: sender?t,m -&gt;
+112 			if
+113 			:: t == RESET -&gt; n = -1; goto I
+114 			:: else	/* ignored, p. 152 */
+115 			fi
+116 		:: timeout -&gt;
+117 			goto reset
+118 		od
+119 }
+120 active proctype Receiver()
+121 {	byte t, n, m, Nexp;
+122 
+123 	xr recv;
+124 	xs sender;
+125 
+126 I:		/* Idle State */
+127 		do
+128 #if LOSS==1
+129 		:: recv?_,_ -&gt; progress2: skip
+130 #endif
+131 		:: recv?RESET,0 -&gt;
+132 ackreset:		sender!RESET,0;		/* stay in idle */
+133 			n = 0; Nexp = 0;
+134 			goto I
+135 
+136 		:: atomic { recv?DATA(m) -&gt;	/* E-exp */
+137 			assert(m == n);
+138 advance:		printf("MSC: EXP\n");
+139 			n = (n+1)%4;
+140 			assert(m == Nexp);
+141 			Nexp = (m+1)%4;
+142 			if
+143 			:: sender!RDY,n; goto E
+144 			:: sender!NOTRDY,n; goto N
+145 			fi
+146 		   }
+147 
+148 		:: recv?NODATA(m) -&gt;		/* N-exp */
+149 			assert(m == n)
+150 
+151 		/* Timeout: ignored */
+152 
+153 		/* only the receiver can initiate a data
+154 		   transfer; p. 156 [Needham'82]
+155 		   this is modeled by the statement below:
+156 		*/
+157 		:: empty(recv) -&gt; sender!RDY,n; goto E
+158 
+159 		:: goto reset
+160 		od;
+161 E:
+162 		do
+163 #if LOSS==1
+164 		:: recv?_,_ -&gt; progress1: skip
+165 #endif
+166 		:: recv?RESET,0 -&gt;
+167 			goto ackreset
+168 
+169 		:: atomic { recv?DATA(m) -&gt;
+170 			if
+171 			:: ((m+1)%4 == n) -&gt;		/* E-rep */
+172 				printf("MSC: REP\n");
+173 				goto retrans
+174 			:: (m == n) -&gt;			/* E-exp */
+175 				goto advance
+176 			fi
+177 		   }
+178 
+179 		:: recv?NODATA(m) -&gt;		/* N-exp  */
+180 			assert(m == n);
+181 			goto I
+182 
+183 		/* see also the matching code in the sender model;
+184 		   to check less well-behaved timeout behavior for
+185 		   the receiver process, replace the timeout keyword
+186 		   below with "empty(recv)" (or "skip" for a real
+187 		   torture test, with significant extra complexity)
+188 		*/
+189 		:: timeout -&gt;
+190 			printf("MSC: RTO\n");
+191 retrans:		sender!RDY,n;
+192 			goto E
+193 
+194 		:: goto reset
+195 		od;
+196 N:
+197 		do
+198 #if LOSS==1
+199 		:: recv?_,_ -&gt; progress0: skip
+200 #endif
+201 		:: recv?RESET,0 -&gt;
+202 			goto ackreset
+203 
+204 		:: recv?DATA(m) -&gt;		/* E-rep */
+205 			assert((m+1)%4 == n);	/* E-exp and N-exp: error */
+206 			printf("MSC: REP\n");
+207 			sender!NOTRDY,n	/* retransmit and stay in N */
+208 
+209 		:: sender!RDY,n -&gt;		/* buffer ready event */
+210 			goto E
+211 
+212 		/* Timeout: ignored */
+213 
+214 		:: goto reset
+215 		od;
+216 progress:
+217 reset:		sender!RESET,0;
+218 		do
+219 #if LOSS==1
+220 		:: recv?_,_ -&gt; progress3: skip
+221 #endif
+222 		:: recv?t,m -&gt;
+223 			if
+224 			:: t == RESET -&gt; n = 0; Nexp = 0; goto I
+225 			:: else	/* ignored, p. 152 */
+226 			fi
+227 		:: timeout -&gt;
+228 			goto reset
+229 		od
+230 }
+</pre>
+<h2><tt>7. Sleep-Wakeup Process Scheduling</tt></h2>
+<p>
+The model below for implementing sleep and wakeup routines
+in a distributed operating systems kernel is based on
+<a href="#R10">Ruane's</a> description.
+The model contains an error that can be detected as a
+fair non-progress cycle (use runtime options -l and -f).
+Try to determine the cause of the error, and how to fix it.
+(It can be repaired by the addition of one single statement in the
+client process.)
+
+</p><pre>  1 mtype = { Wakeme, Running };        /* file ex.7 */
+  2 
+  3 bit	lk,	sleep_q;
+  4 bit	r_lock,	r_want;
+  5 mtype	State =	Running;
+  6 
+  7 active proctype client()
+  8 {
+  9 sleep:					/* sleep routine */
+ 10 	atomic { (lk == 0) -&gt; lk = 1 };	/* spinlock(&amp;lk) */
+ 11 	do				/* while r-&gt;lock */
+ 12 	:: (r_lock == 1) -&gt;		/* r-&gt;lock == 1 */
+ 13 		r_want = 1;
+ 14 		State = Wakeme;
+ 15 		lk = 0;			/* freelock(&amp;lk) */
+ 16 		(State == Running);	/* wait for wakeup */
+ 17 	:: else -&gt;			/* r-&gt;lock == 0 */
+ 18 		break
+ 19 	od;
+ 20 progress:
+ 21 	assert(r_lock == 0);		/* should still be true */
+ 22 	r_lock = 1;			/* consumed resource */
+ 23 	lk = 0;				/* freelock(&amp;lk) */
+ 24 	goto sleep
+ 25 }
+ 26 
+ 27 active proctype server()		/* interrupt routine */
+ 28 {
+ 29 wakeup:					/* wakeup routine */
+ 30 	r_lock = 0;			/* r-&gt;lock = 0 */
+ 31 	(lk == 0);			/* waitlock(&amp;lk) */
+ 32 	if
+ 33 	:: r_want -&gt;			/* someone is sleeping */
+ 34 		atomic {		/* spinlock on sleep queue */
+ 35 			(sleep_q == 0) -&gt; sleep_q = 1
+ 36 		};
+ 37 		r_want = 0;
+ 38 #ifdef PROPOSED_FIX
+ 39 		(lk == 0);		/* waitlock(&amp;lk) */
+ 40 #endif
+ 41 		if
+ 42 		:: (State == Wakeme) -&gt;
+ 43 			State = Running;
+ 44 		:: else -&gt;
+ 45 		fi;
+ 46 		sleep_q = 0
+ 47 	:: else -&gt;
+ 48 	fi;
+ 49 	goto wakeup
+ 50 }
+</pre>
+<p>
+</p><h2><tt>8. A Leader Election Algorithm</tt></h2>
+<p>
+The model below follows the description of the leader election
+protocol in a unidirectional ring from <a href="#R11">Dolev et al.</a> as it
+is discussed and formalized by <a href="#R12">Raynal</a>.
+
+</p><pre>  1 #define N	5	/* nr of processes (use 5 for demos) */
+  2 #define I	3	/* node given the smallest number    */
+  3 #define L	10	/* size of buffer  (&gt;= 2*N) */
+  4                     /* file ex.8 */
+  5 mtype = { one, two, winner };
+  6 chan q[N] = [L] of { mtype, byte};
+  7 
+  8 byte nr_leaders = 0;
+  9 
+ 10 proctype node (chan in, out; byte mynumber)
+ 11 {	bit Active = 1, know_winner = 0;
+ 12 	byte nr, maximum = mynumber, neighbourR;
+ 13 
+ 14 	xr in;	/* exclusive recv access to channel in */
+ 15 	xs out;	/* exclusive send access to channel out */
+ 16 
+ 17 	printf("MSC: %d\n", mynumber);
+ 18 	out!one(mynumber);
+ 19 end:	do
+ 20 	:: in?one(nr) -&gt;
+ 21 		if
+ 22 		:: Active -&gt; 
+ 23 			if
+ 24 			:: nr != maximum -&gt;
+ 25 				out!two(nr);
+ 26 				neighbourR = nr
+ 27 			:: else -&gt;
+ 28 				/* max is greatest number */
+ 29 				assert(nr == N);
+ 30 				know_winner = 1;
+ 31 				out!winner,nr;
+ 32 			fi
+ 33 		:: else -&gt;
+ 34 			out!one(nr)
+ 35 		fi
+ 36 
+ 37 	:: in?two(nr) -&gt;
+ 38 		if
+ 39 		:: Active -&gt; 
+ 40 			if
+ 41 			:: neighbourR &gt; nr &amp;&amp; neighbourR &gt; maximum -&gt;
+ 42 				maximum = neighbourR;
+ 43 				out!one(neighbourR)
+ 44 			:: else -&gt;
+ 45 				Active = 0
+ 46 			fi
+ 47 		:: else -&gt;
+ 48 			out!two(nr)
+ 49 		fi
+ 50 	:: in?winner,nr -&gt;
+ 51 		if
+ 52 		:: nr != mynumber -&gt;
+ 53 			printf("MSC: LOST\n");
+ 54 		:: else -&gt;
+ 55 			printf("MSC: LEADER\n");
+ 56 			nr_leaders++;
+ 57 			assert(nr_leaders == 1)
+ 58 		fi;
+ 59 		if
+ 60 		:: know_winner
+ 61 		:: else -&gt; out!winner,nr
+ 62 		fi;
+ 63 		break
+ 64 	od
+ 65 }
+ 66 
+ 67 init {
+ 68 	byte proc;
+ 69 	atomic {
+ 70 		proc = 1;
+ 71 		do
+ 72 		:: proc &lt;= N -&gt;
+ 73 			run node (q[proc-1], q[proc%N], (N+I-proc)%N+1);
+ 74 			proc++
+ 75 		:: proc &gt; N -&gt;
+ 76 			break
+ 77 		od
+ 78 	}
+ 79 }
+</pre>
+<p>
+</p><h2><tt>9. A Go-Back-N Sliding Window Protocol</tt></h2>
+<p>
+This go-back-n sliding window protocol follows the description
+from <a href="#R13">Tanenbaum</a>.
+The model below includes some annotations to
+facilitate simulations.
+
+</p><pre>  1 #define MaxSeq	3	/* window size */
+  2 #define Wrong(x)	x = (x+1) % (MaxSeq)
+  3 #define Right(x)	x = (x+1) % (MaxSeq + 1)
+  4 #define inc(x)		Right(x)
+  5                                             /* file ex.9 */
+  6 chan q[2] = [MaxSeq] of { byte, byte };	/* message passing channel */
+  7 
+  8 active [2] proctype p5()	/* starts two copies of proctype p5 */
+  9 {	byte	NextFrame, AckExp, FrameExp, r, s, nbuf, i;
+ 10 	chan	in, out;
+ 11 	in  = q[_pid];
+ 12 	out = q[1-_pid];
+ 13 	xr in; xs out;		/* partial order reduction claims */
+ 14 
+ 15 	do
+ 16 	:: nbuf &lt; MaxSeq -&gt;	/* outgoing messages */
+ 17 		nbuf++;
+ 18 		out!NextFrame , (FrameExp + MaxSeq) % (MaxSeq + 1);
+ 19 		inc(NextFrame)
+ 20 
+ 21 	:: q[_pid]?r,s -&gt;	/* incoming messages */
+ 22 		if
+ 23 		:: r == FrameExp -&gt;
+ 24 			printf("MSC: accept %d\n", r);
+ 25 			inc(FrameExp)
+ 26 		:: else /* ignore message */
+ 27 		fi;
+ 28 		do
+ 29 		:: ((AckExp &lt;= s) &amp;&amp; (s &lt;  NextFrame))
+ 30 		|| ((AckExp &lt;= s) &amp;&amp; (NextFrame &lt;  AckExp))
+ 31 		|| ((s &lt;  NextFrame) &amp;&amp; (NextFrame &lt;  AckExp)) -&gt;
+ 32 			nbuf--;
+ 33 			inc(AckExp)
+ 34 		:: else -&gt; break
+ 35 		od
+ 36 
+ 37 	:: timeout -&gt;		/* retransmission timeout */
+ 38 		NextFrame = AckExp;
+ 39 		printf("MSC: timeout\n");
+ 40 		i = 1;
+ 41 		do
+ 42 		:: i &lt;= nbuf -&gt;
+ 43 			out!NextFrame , (FrameExp + MaxSeq) % (MaxSeq + 1);
+ 44 			inc(NextFrame);
+ 45 			i++
+ 46 		:: else -&gt; break
+ 47 		od
+ 48 	od
+ 49 }
+</pre>
+When running the verification with partial order reduction
+enabled (the default), the verifier will complain about a
+suspected violation of the exclusive channel access assertions
+(the xr and xs statements).
+In this case, the complaint is unjustified. It is caused by
+the attempt to make the code for sender and receiver equal,
+and the use of a channel array q[].  The complaint
+can be supressed by compiling as follows:
+<pre>$ spin -a ex.9
+$ gcc -DSAFETY -DXUSAFE -o pan pan.c
+$ ./pan -m40000
+. . .
+</pre>
+The directive -DSAFETY says that we are only interested
+in safety properties (not LTL properties or cycles).
+The directive -DXUSAFE tells the verifier that the xr
+and xs assertions need not be checked.
+<p>
+To reduce the complexity of the model, without affecting
+its scope, one can add d_step and atomic
+sequences to the model, as shown in the modified version
+of this code below.
+</p><pre>  1 #define MaxSeq	3                     /* file ex.9b */
+  2 #define MaxSeq_plus_1	4
+  3 #define inc(x)	x = (x + 1) % (MaxSeq + 1)
+  4 
+  5 chan q[2] = [MaxSeq] of { byte, byte };
+  6 
+  7 active [2] proctype p5()
+  8 {	byte	NextFrame, AckExp, FrameExp,
+  9 		r, s, nbuf, i;
+ 10 	chan in, out;
+ 11 
+ 12 	d_step {
+ 13 		in = q[_pid];
+ 14 		out = q[1-_pid]
+ 15 	};
+ 16 	xr in;
+ 17 	xs out;
+ 18 
+ 19 	do
+ 20 	:: atomic { nbuf &lt; MaxSeq -&gt;
+ 21 		nbuf++;
+ 22 		out!NextFrame , (FrameExp + MaxSeq) % (MaxSeq + 1);
+ 23 		printf("MSC: nbuf: %d\n", nbuf);
+ 24 		inc(NextFrame)
+ 25 	}
+ 26 	:: atomic { in?r,s -&gt;
+ 27 		if
+ 28 		:: r == FrameExp -&gt;
+ 29 			printf("MSC: accept %d\n", r);
+ 30 			inc(FrameExp)
+ 31 		:: else
+ 32 			-&gt; printf("MSC: reject\n")
+ 33 		fi
+ 34 	};
+ 35 	d_step {
+ 36 		do
+ 37 		:: ((AckExp &lt;= s) &amp;&amp; (s &lt;  NextFrame))
+ 38 		|| ((AckExp &lt;= s) &amp;&amp; (NextFrame &lt;  AckExp))
+ 39 		|| ((s &lt;  NextFrame) &amp;&amp; (NextFrame &lt;  AckExp)) -&gt;
+ 40 			nbuf--;
+ 41 			printf("MSC: nbuf: %d\n", nbuf);
+ 42 			inc(AckExp)
+ 43 		:: else -&gt;
+ 44 			printf("MSC: %d %d %d\n", AckExp, s, NextFrame);
+ 45 			break
+ 46 		od; skip
+ 47 	}
+ 48 	:: timeout -&gt;
+ 49 	d_step {
+ 50 		NextFrame = AckExp;
+ 51 		printf("MSC: timeout\n");
+ 52 		i = 1;
+ 53 		do
+ 54 		:: i &lt;= nbuf -&gt;
+ 55 			out!NextFrame , (FrameExp + MaxSeq) % (MaxSeq + 1);
+ 56 			inc(NextFrame);
+ 57 			i++
+ 58 		:: else -&gt;
+ 59 			break
+ 60 		od; i = 0
+ 61 	}
+ 62 	od
+ 63 }
+</pre>
+Next, we may want to verify that this protocol correctly
+transfers data, without loss or reordering.
+The model can be modified as follows to perform these checks.
+The verifications are based on <a href="#R14">Wolper's</a> data independence
+method, using three colored messages (balls).  To reduce complexity,
+we make sure that only one sender transmits the colored balls,
+and the other checks that they are accepted in the proper sequence.
+The return direction transmits only dummy balls, and accepts them
+without check.
+<pre>  1 #define MaxSeq	3		/* file: ex.9c */
+  2 #define MaxSeq_plus_1	4
+  3 #define inc(x)	x = (x + 1) % (MaxSeq + 1)
+  4 
+  5 #define CHECKIT
+  6 
+  7 #ifdef CHECKIT
+  8 	mtype = { red, white, blue };	/* Wolper's test */
+  9 	chan source = [0] of { mtype };
+ 10 	chan q[2] = [MaxSeq] of { mtype, byte, byte };
+ 11 	mtype rcvd = white;
+ 12 	mtype sent = white;
+ 13 #else
+ 14 	chan q[2] = [MaxSeq] of { byte, byte };
+ 15 #endif
+ 16 
+ 17 active [2] proctype p5()
+ 18 {	byte	NextFrame, AckExp, FrameExp,
+ 19 		r, s, nbuf, i;
+ 20 	chan in, out;
+ 21 #ifdef CHECKIT
+ 22 	mtype	ball;
+ 23 	byte frames[MaxSeq_plus_1];
+ 24 #endif
+ 25 
+ 26 	d_step {
+ 27 		in = q[_pid];
+ 28 		out = q[1-_pid]
+ 29 	};
+ 30 
+ 31 	xr in;
+ 32 	xs out;
+ 33 
+ 34 	do
+ 35 	:: atomic {
+ 36 		nbuf &lt; MaxSeq -&gt;
+ 37 		nbuf++;
+ 38 #ifdef CHECKIT
+ 39 		if
+ 40 		:: _pid%2 -&gt; source?ball
+ 41 		:: else
+ 42 		fi;
+ 43 		frames[NextFrame] = ball;
+ 44 		out!ball, NextFrame , (FrameExp + MaxSeq) % (MaxSeq + 1);
+ 45 		if
+ 46 		:: _pid%2 -&gt; sent = ball;
+ 47 		:: else
+ 48 		fi;
+ 49 #else
+ 50 		out!NextFrame , (FrameExp + MaxSeq) % (MaxSeq + 1);
+ 51 #endif
+ 52 #ifdef VERBOSE
+ 53 		printf("MSC: nbuf: %d\n", nbuf);
+ 54 #endif
+ 55 		inc(NextFrame)
+ 56 	}
+ 57 #ifdef CHECKIT
+ 58 	:: atomic { in?ball,r,s -&gt;
+ 59 #else
+ 60 	:: atomic { in?r,s -&gt;
+ 61 #endif
+ 62 		if
+ 63 		:: r == FrameExp -&gt;
+ 64 #ifdef VERBOSE
+ 65 			printf("MSC: accept %d\n", r);
+ 66 #endif
+ 67 #ifdef CHECKIT
+ 68 			if
+ 69 			:: _pid%2
+ 70 			:: else -&gt; rcvd = ball
+ 71 			fi;
+ 72 #endif
+ 73 			inc(FrameExp)
+ 74 		:: else
+ 75 #ifdef VERBOSE
+ 76 			-&gt; printf("MSC: reject\n")
+ 77 #endif
+ 78 		fi
+ 79 	};
+ 80 	d_step {
+ 81 	 	do
+ 82 		:: ((AckExp &lt;= s) &amp;&amp; (s &lt;  NextFrame))
+ 83 		|| ((AckExp &lt;= s) &amp;&amp; (NextFrame &lt;  AckExp))
+ 84 		|| ((s &lt;  NextFrame) &amp;&amp; (NextFrame &lt;  AckExp)) -&gt;
+ 85 			nbuf--;
+ 86 #ifdef VERBOSE
+ 87 			printf("MSC: nbuf: %d\n", nbuf);
+ 88 #endif
+ 89 			inc(AckExp)
+ 90 		:: else -&gt;
+ 91 #ifdef VERBOSE
+ 92 			printf("MSC: %d %d %d\n", AckExp, s, NextFrame);
+ 93 #endif
+ 94 			break
+ 95 		od;
+ 96 		skip
+ 97 	}
+ 98 	:: timeout -&gt;
+ 99 	d_step {
+100 		NextFrame = AckExp;
+101 #ifdef VERBOSE
+102 		printf("MSC: timeout\n");
+103 #endif
+104 		i = 1;
+105 		do
+106 		:: i &lt;= nbuf -&gt;
+107 #ifdef CHECKIT
+108 			if
+109 			:: _pid%2 -&gt; ball = frames[NextFrame]
+110 			:: else
+111 			fi;		
+112 			out!ball, NextFrame , (FrameExp + MaxSeq) % (MaxSeq + 1);
+113 #else
+114 			out!NextFrame , (FrameExp + MaxSeq) % (MaxSeq + 1);
+115 #endif
+116 			inc(NextFrame);
+117 			i++
+118 		:: else -&gt;
+119 			break
+120 		od;
+121 		i = 0
+122 	}
+123 	od
+124 }
+125 #ifdef CHECKIT
+126 active proctype Source()
+127 {
+128 	do
+129 	:: source!white
+130 	:: source!red -&gt; break
+131 	od;
+132 	do
+133 	:: source!white
+134 	:: source!blue -&gt; break
+135 	od;
+136 end:	do
+137 	:: source!white
+138 	od
+139 }
+140 
+141 #define sw	(sent == white)
+142 #define sr	(sent == red)
+143 #define sb	(sent == blue)
+144 
+145 #define rw	(rcvd == white)
+146 #define rr	(rcvd == red)
+147 #define rb	(rcvd == blue)
+148 
+149 #define LTL	3
+150 #if LTL==1
+151 
+152 never {		/* ![](sr -&gt; &lt;&gt; rr) */
+153 /* the claims were produced by spin -f and edited */
+154         do
+155         :: 1
+156         :: !rr &amp;&amp; sr -&gt; goto accept
+157         od;
+158 accept:
+159         if
+160         :: !rr -&gt; goto accept
+161         fi
+162 }
+163 
+164 #endif
+165 #if LTL==2
+166 
+167 never {		/* !rr U rb */
+168 	do
+169         :: !rr
+170         :: rb -&gt; break	/* move to implicit 2nd state */
+171         od
+172 }
+173 
+174 #endif
+175 #if LTL==3
+176 
+177 never {		/* (![](sr -&gt; &lt;&gt; rr)) || (!rr U rb) */
+178 
+179         if
+180         :: 1 -&gt; goto T0_S5
+181         :: !rr &amp;&amp; sr -&gt; goto accept_S8
+182         :: !rr -&gt; goto T0_S2
+183         :: rb -&gt; goto accept_all
+184         fi;
+185 accept_S8:
+186         if
+187         :: !rr -&gt; goto T0_S8
+188         fi;
+189 T0_S2:
+190         if
+191         :: !rr -&gt; goto T0_S2
+192         :: rb -&gt; goto accept_all
+193         fi;
+194 T0_S8:
+195         if
+196         :: !rr -&gt; goto accept_S8
+197         fi;
+198 T0_S5:
+199         if
+200         :: 1 -&gt; goto T0_S5
+201         :: !rr &amp;&amp; sr -&gt; goto accept_S8
+202         fi;
+203 accept_all:
+204         skip
+205 }
+206 #endif
+207 
+208 #endif
+</pre>
+<h2><tt>References</tt></h2>
+<ul>
+<li><a name="R2"> Bartlett, K.A.</a>, Scantlebury, R.A., and Wilkinson, P.T.
+`A note on reliable full-duplex transmission over half-duplex lines,'
+Comm. of the ACM, 1969, Vol. 12, No. 5, 260-265, Figure 3c.
+
+</li><li><a name="R3">C.H. West</a>, 
+`General technique for communications protocol validation,'
+IBM J. Res. Develop., 1978, Vol. 22, No. 3, pp. 393-404.
+
+</li><li><a name="R4">E.W. Dijkstra</a>,
+`Solution to a problem in concurrent programming control,'
+<i>Comm. of the ACM</i>, 1965, Vol 8, No. 9, p. 569.
+
+</li><li><a name="R5">M. Raynal</a>,
+<i>Algorithms for Mutual Exclusion</i>,
+MIT Press, Cambridge, Mass., 1986, 107 pgs.
+(The 1986 edition is a translation from the original
+French version published in 1984.)
+
+</li><li><a name="R6">L. Lamport</a>,
+`The mutual exclusion problem -- parts I and II,'
+<i>Journal of the ACM</i>, Vol. 33, No. 2, April 1986, pp. 313-347.
+
+</li><li><a name="R7">G.L. Peterson</a>,
+`Myths about the mutual exclusion problem,'
+<i>Inf. Proc. Letters</i>, 1981, Vol. 12, No. 3, pp. 115-116.
+
+</li><li><a name="R8">G. Berthelot, and R. Terrat,</a>
+`Petri Net Theory for the correctness of protocols,'
+<i>IEEE Trans. on Comm.</i>, Vol COM-30, No. 12, Dec. 1982, pp. 2497-2505.
+
+</li><li><a name="R9">R.M. Needham, A.J. Herbert</a>,
+<i>The Cambridge Distributed Computing System</i>,
+Addison-Wesley Publ., London, 1982, p. 154.
+
+</li><li><a name="R10">L.M. Ruane</a>,
+`Process synchronization in the UTS kernel,'
+<i>Computing Systems</i>, (Usenix, Summer 1990), Vol. 3, No. 3, pp. 387--421.
+
+</li><li><a name="R11">D. Dolev, M. Klawe, and M. Rodeh,</a>
+`An O(n log n) unidirectional distributed algorithm
+for extrema finding in a circle,'
+<i>Journal of Algorithms</i>, Vol 3. (1982), pp. 245-260.
+
+</li><li><a name="R12">M. Raynal</a>,
+<i>Distributed algorithms and protocols</i>,
+John Wiley and Sons, New York, 1992.
+
+</li><li><a name="R13">A. Tanenbaum</a>,
+<i>Computer Networks</i>, 2nd Ed.,
+Prentice Hall, Englewood Cliffs, NJ., 1989, p. 214, 232-233.
+
+</li><li><a name="R14">P. Wolper</a>,
+``Specifying interesting properties of programs in propositional temporal logic,''
+<i>Proc. 13th ACM Symposium on Principles of Programming Languages</i>,
+St. Petersburg Beach, Fla., January 1986, pp. 148-193.
+
+</li></ul>
+<p></p><p></p><p></p><hr>
+<table cols="3">
+<tbody><tr>
+<td valign="top" width="200">
+<a href="http://spinroot.com/spin/Man/index.html">Spin Online References</a><br>
+<a href="http://spinroot.com/spin/Man/promela.html">Promela Manual Index</a><br>
+<a href="http://spinroot.com/spin/Man/grammar.html">Promela Grammar</a><br>
+<a href="http://spinroot.com/spin/">Spin HomePage</a>
+</td>
+<td align="center" valign="top" width="100"></td>
+<td align="right" valign="top" width="400">
+<font size="3"><b><tt>(Page Updated: 28 November 2004)</tt></b></font></td></tr>
+</tbody></table>
+
+</body></html>
